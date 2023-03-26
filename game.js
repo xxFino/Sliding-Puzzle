@@ -7,6 +7,15 @@ const gameState = [
     [gameTiles[6], gameTiles[7], gameTiles[8]],
 ];
 
+function render(gameBoard, gameState) {
+
+    gameState.forEach((row) => {
+        row.forEach((column) => {
+            gameBoard.appendChild(column);
+        });
+    });
+};
+
 gameBoard.addEventListener('click', (event) => {
     const target = event.target;
 
@@ -17,7 +26,7 @@ gameBoard.addEventListener('click', (event) => {
             if (column === target) {
                 x = rowIndex;
                 y = columnIndex;
-            }
+            };
         });
     });
 
@@ -28,9 +37,15 @@ gameBoard.addEventListener('click', (event) => {
             if (column.innerText === "") {
                 emptyX = rowIndex;
                 emptyY = columnIndex;
-            }
+            };
         });
     });
 
     console.log(emptyX, emptyY);
+
+    const temp = gameState[x][y];
+    gameState[x][y] = gameState[emptyX][emptyY];
+    gameState[emptyX][emptyY] = temp;
+
+    render(gameBoard, gameState);
 });
