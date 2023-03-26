@@ -41,11 +41,13 @@ gameBoard.addEventListener('click', (event) => {
         });
     });
 
-    console.log(emptyX, emptyY);
-
-    const temp = gameState[x][y];
-    gameState[x][y] = gameState[emptyX][emptyY];
-    gameState[emptyX][emptyY] = temp;
-
-    render(gameBoard, gameState);
+    if (
+        (y === emptyY && (x + 1 === emptyX || x - 1 === emptyX)) ||
+        (x === emptyX && (y + 1 === emptyY || y - 1 === emptyY))
+    ) {
+        const temp = gameState[x][y];
+        gameState[x][y] = gameState[emptyX][emptyY];
+        gameState[emptyX][emptyY] = temp;
+        render(gameBoard, gameState);
+    };
 });
