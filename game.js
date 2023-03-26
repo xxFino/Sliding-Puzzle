@@ -7,3 +7,30 @@ const gameState = [
     [gameTiles[6], gameTiles[7], gameTiles[8]],
 ];
 
+gameBoard.addEventListener('click', (event) => {
+    const target = event.target;
+
+    let x, y;
+
+    gameState.forEach((row, rowIndex) => {
+        row.forEach((column, columnIndex) => {
+            if (column === target) {
+                x = rowIndex;
+                y = columnIndex;
+            }
+        });
+    });
+
+    let emptyX, emptyY;
+
+    gameState.forEach((row, rowIndex) => {
+        row.forEach((column, columnIndex) => {
+            if (column.innerText === "") {
+                emptyX = rowIndex;
+                emptyY = columnIndex;
+            }
+        });
+    });
+
+    console.log(emptyX, emptyY);
+});
